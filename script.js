@@ -69,13 +69,15 @@ function addHero() {
 	let nameInput = document.getElementById('heroName');
 	let organizationInput = document.getElementById('heroOrganization');
 	let descriptionInput = document.getElementById('heroDescription');
+	let imageInput = document.getElementById('heroImage');
 
-	if (nameInput.value && descriptionInput.value) {
-		heroes.push([nameInput.value, organizationInput.value, 'Описание', descriptionInput.value]);
+	if (nameInput.value && descriptionInput.value && imageInput.value) {
+		heroes.push([nameInput.value, organizationInput.value, descriptionInput.value, imageInput.value]);
 		displayHeroes();
 		nameInput.value = '';
 		organizationInput.value = '';
 		descriptionInput.value = '';
+		imageInput.value = '';
 
 		errorMessageHide();
 		closeModal();
