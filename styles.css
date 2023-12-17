@@ -238,12 +238,6 @@ main {
 	margin-bottom: 15px;
 }
 
-#heroDescription {
-	height: 131px;
-	overflow: hidden;
-	margin-bottom: 18px;
-}
-
 .error {
 	color: var(--error, #e05050);
 	font-family: 'SF UI Display';
