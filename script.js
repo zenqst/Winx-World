@@ -3,19 +3,19 @@ let heroes = [
 		'Блум',
 		'Фея',
 		'Лидер клуба Винкс, главная героиня мультсериала «Клуб Винкс: Школа Волшебниц», фея Огня Дракона и принцесса планеты Домино.',
-		'bloom.png'
+		'images/bloom.png'
 	],
 	[
 		'Скай',
 		'Специалист',
 		'Принц Эраклиона, сын короля Эрендора и королевы Самары. Лучший специалист Красного Фонтана. Скай — парень Блум. Был помолвлен с Диаспро, но расторг помолвку ради феи огня дракона.',
-		'sky.png'
+		'images/sky.png'
 	],
 	[
 		'Мария',
 		'Практикум',
 		'Лучшая наставница во всём мире, которая вообще супер крутая и лучше некуда вообще',
-		'img_indev.svg'
+		'images/img_indev.svg'
 	]
 ];
 
@@ -36,7 +36,7 @@ function displayHeroes() {
 		let heroDescription = heroes[i][2];
 		let heroImgs = heroes[i][3];
 
-		heroDiv.innerHTML = `<img src="images/${heroImgs}" class="hero-card__image" alt="Картинка персонажа" /><div class='hero-card__text'> <div class='hero-card__text-two'> <h2 class='hero-card__title'>${heroNames}</h2><p class='hero-card__organization'>${heroOrganizations}</p> </div> <p class='hero-card__description'>${heroDescription}</p> </div>`;
+		heroDiv.innerHTML = `<img src="${heroImgs}" class="hero-card__image" alt="Картинка персонажа" /><div class='hero-card__text'> <div class='hero-card__text-two'> <h2 class='hero-card__title'>${heroNames}</h2><p class='hero-card__organization'>${heroOrganizations}</p> </div> <p class='hero-card__description'>${heroDescription}</p> </div>`;
 		heroesContainer.appendChild(heroDiv);
 	}
 }
@@ -71,7 +71,7 @@ function addHero() {
 	let descriptionInput = document.getElementById('heroDescription');
 
 	if (nameInput.value && descriptionInput.value) {
-		heroes.push([nameInput.value, organizationInput.value, descriptionInput.value, 'img_indev.svg']);
+		heroes.push([nameInput.value, organizationInput.value, 'Описание', descriptionInput.value]);
 		displayHeroes();
 		nameInput.value = '';
 		organizationInput.value = '';
