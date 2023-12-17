@@ -21,10 +21,21 @@ let heroes = [
 
 let heroesContainer = document.getElementById('heroesContainer');
 
-displayHeroes();
+// Загрузка данных из локального хранилища
+function loadDataFromLocalStorage() {
+	let storedData = localStorage.getItem('heroesData');
+	if (storedData) {
+		heroes = JSON.parse(storedData);
+		displayHeroes();
+	}
+}
+
+// Сохранение данных в локальном хранилище
+function saveDataToLocalStorage() {
+	localStorage.setItem('heroesData', JSON.stringify(heroes));
+}
 
 function displayHeroes() {
-	let heroesContainer = document.getElementById('heroesContainer');
 	heroesContainer.innerHTML = '';
 
 	for (let i = 0; i < heroes.length; i++) {
@@ -65,6 +76,7 @@ function errorMessageHide() {
 	error.classList.remove('show');
 }
 
+// Добавление персонажа с сохранением данных в локальном хранилище
 function addHero() {
 	let nameInput = document.getElementById('heroName');
 	let organizationInput = document.getElementById('heroOrganization');
@@ -74,6 +86,7 @@ function addHero() {
 	if (nameInput.value && descriptionInput.value && imageInput.value) {
 		heroes.push([nameInput.value, organizationInput.value, descriptionInput.value, imageInput.value]);
 		displayHeroes();
+		saveDataToLocalStorage(); // Сохранение данных после добавления
 		nameInput.value = '';
 		organizationInput.value = '';
 		descriptionInput.value = '';
@@ -85,6 +98,9 @@ function addHero() {
 		errorMessage();
 	}
 }
+
+// Вызов функции загрузки данных при загрузке страницы
+window.addEventListener('load', loadDataFromLocalStorage);
 
 document.getElementById('addButton').addEventListener('click', addHero);
 document.getElementById('openModalButton').addEventListener('click', openModal);
