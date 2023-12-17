@@ -1,0 +1,359 @@
+/* Цвета и шрифты */
+
+:root {
+	--main: #e80080;
+	--black: #212121;
+	--conrast: #a2f700;
+	--white: #ffffff;
+	--error: #e05050;
+}
+
+@font-face {
+	src: url(fonts/sf-ui-display-heavy.otf);
+	font-family: 'SF UI Display';
+	font-style: normal;
+	font-weight: 800;
+	line-height: normal;
+}
+
+@font-face {
+	src: url(fonts/sf-ui-display-bold.otf);
+	font-family: 'SF UI Display';
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+@font-face {
+	src: url(fonts/sf-ui-display-semibold.otf);
+	font-family: 'SF UI Display';
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}
+
+@font-face {
+	src: url(fonts/sf-ui-display-medium.otf);
+	font-family: 'SF UI Display';
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+@font-face {
+	src: url(fonts/sf-ui-display-regular.ttf);
+	font-family: 'SF UI Display';
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+@font-face {
+	src: url(fonts/sf-ui-display-regular.ttf);
+	font-family: 'SF UI Display';
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+/* --- */
+
+/* Стили для буков */
+
+h1 {
+	color: var(--black, #212121);
+	font-family: 'SF UI Display';
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+h2 {
+	color: var(--black, #212121);
+	font-family: 'SF UI Display';
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}
+
+h3 {
+	color: var(--black, #212121);
+	font-family: 'SF UI Display';
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+p {
+	color: var(--black, #212121);
+	font-family: SF UI Display;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+/* --- */
+
+/* Обнуление */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* --- */
+
+html,
+body {
+	scrollbar-gutter: stable;
+}
+
+body {
+	padding-left: 100px;
+	padding-right: 100px;
+	background: #fbfbfb;
+}
+
+/* Хедер */
+
+header {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	display: flex;
+	justify-content: space-between;
+	/* background: var(--white, #ffffff); */
+	width: 100%;
+}
+
+.logo {
+	width: 140px;
+	height: 70px;
+}
+
+.nav-list {
+	display: flex;
+	width: 754px;
+	padding: 10px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nav-item {
+	display: inline;
+}
+
+.nav-link {
+	font-family: 'SF UI Display';
+	font-size: 24px;
+	font-weight: 400;
+	text-decoration: none;
+	color: var(--black, #212121);
+}
+
+.nav-addButton {
+	color: var(--white, #fff);
+	font-family: 'SF UI Display';
+	font-size: 24px;
+	font-weight: 400;
+	background-color: var(--main, #e80080);
+	border-radius: 10px;
+	border: none;
+	padding: 10px 20px;
+}
+
+.nav-addButton:active {
+	background-color: #c0006a;
+}
+
+/* --- */
+
+/* Мэин */
+
+main {
+}
+
+.character-add {
+	display: flex;
+	flex-direction: column;
+	border: none;
+	width: 600px;
+	height: 600px;
+	background: var(--white, #ffffff);
+	border-radius: 30px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	align-items: center;
+	opacity: 0;
+	visibility: hidden;
+	padding-top: 34px;
+	padding-right: 20px;
+	padding-right: 20px;
+}
+
+.character-add.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.character-add::backdrop {
+	background: rgba(34, 34, 34, 0.3);
+	backdrop-filter: blur(5.550000190734863px);
+}
+
+.add-title {
+	display: flex;
+	width: 465px;
+	height: 50px;
+	gap: 46px;
+	padding-bottom: 46px;
+	align-items: center;
+	margin-left: auto;
+}
+
+.modal-close {
+	border: none;
+	background: none;
+}
+
+.add-input {
+	display: flex;
+	color: var(--black, #212121);
+	font-family: 'SF UI Display';
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	width: 369px;
+	padding: 10px 30px 10px 20px;
+	border-radius: 10px;
+	border: 1px solid var(--black, #212121);
+	margin-bottom: 15px;
+}
+
+#heroDescription {
+	height: 131px;
+	overflow: hidden;
+	margin-bottom: 18px;
+}
+
+.error {
+	color: var(--error, #e05050);
+	font-family: 'SF UI Display';
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	padding-bottom: 18px;
+	opacity: 0;
+}
+
+.error.show {
+	opacity: 1;
+}
+
+.add-button {
+	border-radius: 10px;
+	background: var(--main, #e80080);
+	padding: 15px 30px;
+	width: 369px;
+	border: none;
+	color: var(--white, #fff);
+	font-family: 'SF UI Display';
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.title-characters {
+	padding-top: 44px;
+	padding-bottom: 44px;
+}
+
+.container-characters {
+	display: flex;
+	align-items: flex-start;
+	gap: 55px;
+	width: 1720px;
+	flex-wrap: wrap;
+}
+
+.hero-card {
+	width: 300px;
+	height: 400px;
+	border-radius: 30px;
+	background: var(--white, #fff);
+	box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.09);
+}
+
+.hero-card__image {
+	width: 300px;
+	height: 200px;
+	border-radius: 30px;
+	overflow: hidden;
+}
+
+.hero-card__text {
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 16px;
+}
+
+.hero-card__text-two {
+	display: flex;
+	align-items: center;
+}
+
+.hero-card__title {
+	display: -webkit-box;
+	width: 140px;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.hero-card__organization {
+	display: -webkit-box;
+	width: 120px;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	text-align: right;
+	text-overflow: ellipsis;
+}
+
+.hero-card__description {
+	padding-top: 20px;
+	display: -webkit-box;
+	width: 268px;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.not-found {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding-top: 220px;
+}
+
+.not-found__text {
+	color: var(--main, #e80080);
+	font-family: SF UI Display;
+	font-size: 128px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: normal;
+}

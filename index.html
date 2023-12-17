@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Мир Winx</title>
+		<link href="styles.css" rel="stylesheet" />
+		<link rel="shortcut icon" href="images/icon.svg" type="image/x-icon" />
+	</head>
+	<body>
+		<header>
+			<a href="/">
+				<img src="images/logo.svg" alt="Winx World Logo" class="logo" />
+			</a>
+
+			<nav>
+				<ul class="nav-list">
+					<li class="nav-item">
+						<a href="pages/not-found.html" class="nav-link">О проекте</a>
+					</li>
+					<li class="nav-item">
+						<a href="pages/not-found.html" class="nav-link">Персонажи Winx</a>
+					</li>
+					<li class="nav-item">
+						<button class="nav-addButton" id="openModalButton">Добавить персонажа</button>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<dialog class="character-add" id="addCharacterModal">
+				<div class="add-title">
+					<h2>Добавление персонажа</h2>
+					<button class="modal-close" id="closeModalButton">
+						<img src="images/cancel_outline.svg" alt="Закрыть окно" />
+					</button>
+				</div>
+				<input class="add-input" type="text" id="heroName" required placeholder="Имя персонажа*" />
+				<input class="add-input" type="text" id="heroOrganization" placeholder="Организация" />
+				<textarea
+					class="add-input"
+					type="text"
+					id="heroDescription"
+					required
+					placeholder="Небольшое описание*"
+				></textarea>
+				<p class="error" id="errorMessage">Поля со * обязательны</p>
+				<button class="add-button" id="addButton">Добавить персонажа</button>
+			</dialog>
+			<h1 class="title-characters">Мои персонажи</h1>
+			<div class="container-characters" id="heroesContainer"></div>
+		</main>
+		<script src="./script.js"></script>
+	</body>
+</html>
