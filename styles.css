@@ -125,7 +125,6 @@ header {
 	padding-bottom: 40px;
 	display: flex;
 	justify-content: space-between;
-	/* background: var(--white, #ffffff); */
 	width: 100%;
 }
 
@@ -154,6 +153,11 @@ header {
 	color: var(--black, #212121);
 }
 
+.github-logo {
+	width: 44px;
+	height: 44px;
+}
+
 .nav-addButton {
 	color: var(--white, #fff);
 	font-family: 'SF UI Display';
@@ -172,9 +176,6 @@ header {
 /* --- */
 
 /* Мэин */
-
-main {
-}
 
 .character-add {
 	display: flex;
@@ -237,7 +238,6 @@ main {
 	border: 1px solid var(--black, #212121);
 	margin-bottom: 15px;
 }
-
 .error {
 	color: var(--error, #e05050);
 	font-family: 'SF UI Display';
