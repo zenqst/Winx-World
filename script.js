@@ -1,111 +1,129 @@
-let heroes = [
-	[
-		'Блум',
-		'Фея',
-		'Лидер клуба Винкс, главная героиня мультсериала «Клуб Винкс: Школа Волшебниц», фея Огня Дракона и принцесса планеты Домино.',
-		'images/bloom.png'
-	],
-	[
-		'Скай',
-		'Специалист',
-		'Принц Эраклиона, сын короля Эрендора и королевы Самары. Лучший специалист Красного Фонтана. Скай — парень Блум. Был помолвлен с Диаспро, но расторг помолвку ради феи огня дракона.',
-		'images/sky.png'
-	],
-	[
-		'Мария',
-		'Практикум',
-		'Лучшая наставница во всём мире, которая вообще супер крутая и лучше некуда вообще',
-		'images/not_img.svg'
-	]
-];
+const studentEmail = 'duck53@yandex.ru';
 
-let heroesContainer = document.getElementById('heroesContainer');
+const container = document.getElementById('cards-container');
 
-displayHeroes();
+let cards;
 
-// Локал стораджи
-//
-// function loadDataFromLocalStorage() {
-// 	let storedData = localStorage.getItem('heroesData');
-// 	if (storedData) {
-// 		heroes = JSON.parse(storedData);
-// 		displayHeroes();
-// 	}
-// }
+fetch(
+	`https://api-code.practicum-team.ru/heroes?_where[_or][0][studentEmail]=${studentEmail}&_where[_or][1][studentEmail]=`
+)
+	.then((response) => response.json())
+	.then((data) => {
+		console.log(data); // В консоли можно исследовать полученные данные
+		cards = data; // Запишем данные в переменную
+		renderCards(cards); // Функция отрисовки полученных данных
+	})
+	.catch((error) => console.error('Ошибка:', error));
 
-// function saveDataToLocalStorage() {
-// 	localStorage.setItem('heroesData', JSON.stringify(heroes));
-// }
+// Передаём массив с данными аргументом в функцию отрисовки карточек
+function renderCards(heroes) {
+	// Чистим контейнер для карточек
+	container.innerHTML = '';
 
-function displayHeroes() {
-	heroesContainer.innerHTML = '';
-
+	//  В цикле достаём из каждого объекта данные о персонаже и вставляем в вёрстку карточки
 	for (let i = 0; i < heroes.length; i++) {
-		let heroDiv = document.createElement('div');
-		heroDiv.className = 'hero-card';
+		let hero = heroes[i];
 
-		let heroNames = heroes[i][0];
-		let heroOrganizations = heroes[i][1];
-		let heroDescription = heroes[i][2];
-		let heroImgs = heroes[i][3];
-
-		let imageUrl = heroImgs ? heroImgs : 'images/not_img.svg';
-
-		heroDiv.innerHTML = `<img src="${imageUrl}" class="hero-card__image" alt="Картинка персонажа" /><div class='hero-card__text'> <div class='hero-card__text-two'> <h2 class='hero-card__title'>${heroNames}</h2><p class='hero-card__organization'>${heroOrganizations}</p> </div> <p class='hero-card__description'>${heroDescription}</p> </div>`;
-		heroesContainer.appendChild(heroDiv);
+		// Создаём верстку карточки и вставляем значения характеристик персонажа
+		const cardHtml = `
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="card-title">
+                    <h2 class="card-title-text">${hero.title}</h2>
+                </div>
+                <div class="card-description">
+                    <p class="card-description-text">${hero.description}</p>
+                    <div class="card-parameters">
+                        <div class="card-parameter">
+                            <p class="card-parameter-title">str</p>
+                            <p class="card-parameter-value">${hero.str}</p>
+                        </div>
+                        <div class="card-parameter">
+                            <p class="card-parameter-title">agi</p>
+                            <p class="card-parameter-value">${hero.agi}</p>
+                        </div>
+                        <div class="card-parameter">
+                            <p class="card-parameter-title">hp</p>
+                            <p class="card-parameter-value">${hero.hp}</p>
+                        </div>
+                        <div class="card-parameter">
+                            <p class="card-parameter-title">int</p>
+                            <p class="card-parameter-value">${hero.int}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+		// Добавляем вёрстку карточки в контейнер
+		container.innerHTML += cardHtml;
 	}
 }
 
-function openModal() {
-	let dialog = document.getElementById('addCharacterModal');
-	dialog.showModal();
-	document.body.style.overflow = 'hidden';
-	addCharacterModal.classList.add('show');
-}
+//Получение элементов формы
+const form = document.forms.addHero; // Получаем форму
+const titleInput = form.elements.title; // Получаем поле с именем
+const descriptionInput = form.elements.description; // Получаем поле с описанием
+const strInput = form.elements.str; // Получаем поле с уровнем силы
+const agiInput = form.elements.agi; // Получаем поле с уровнем ловкости
+const hpInput = form.elements.hp; // Получаем поле с уровнем здоровья
+const intInput = form.elements.int; // Получаем поле с уровнем интеллекта
 
-function closeModal() {
-	let dialog = document.getElementById('addCharacterModal');
-	dialog.close();
-	document.body.style.overflow = '';
-	addCharacterModal.classList.remove('show');
-}
+// Вешаем на форму обработчик события submit
+form.addEventListener('submit', function (evt) {
+	// Отменяем стандартное поведение
+	evt.preventDefault();
 
-function errorMessage() {
-	let error = document.getElementById('errorMessage');
-	error.classList.add('show');
-}
+	// Создаём объект с новым персонажем и записываем данные
+	let newHero = {
+		title: titleInput.value,
+		description: descriptionInput.value,
+		str: strInput.value,
+		agi: agiInput.value,
+		hp: hpInput.value,
+		int: intInput.value,
+		// Чтобы выделить карточки проекта, указываем почту
+		studentEmail: studentEmail
+	};
+	// Формируем JSON-строку из объекта
+	let newHeroJSON = JSON.stringify(newHero);
+});
 
-function errorMessageHide() {
-	let error = document.getElementById('errorMessage');
-	error.classList.remove('show');
-}
+// Вешаем на форму обработчик события submit
+form.addEventListener('submit', function (evt) {
+	// Отменяем стандартное поведение
+	evt.preventDefault();
 
-// Добавление персонажа с сохранением данных в локальном хранилище
-function addHero() {
-	let nameInput = document.getElementById('heroName');
-	let organizationInput = document.getElementById('heroOrganization');
-	let descriptionInput = document.getElementById('heroDescription');
-	let imageInput = document.getElementById('heroImage');
+	// Создаём объект с новым персонажем и записываем данные
+	// Добавляем поле с почтой, чтобы сервер узнавал твои карточки
+	let newHero = {
+		title: titleInput.value,
+		description: descriptionInput.value,
+		str: strInput.value,
+		agi: agiInput.value,
+		hp: hpInput.value,
+		int: intInput.value,
+		studentEmail: studentEmail
+	};
+	// Формируем JSON-строку из объекта
+	let newHeroJSON = JSON.stringify(newHero);
 
-	if (nameInput.value && descriptionInput.value) {
-		heroes.push([nameInput.value, organizationInput.value, descriptionInput.value, imageInput.value]);
-		displayHeroes();
-		// saveDataToLocalStorage(); // Сохранение данных после добавления
-		nameInput.value = '';
-		organizationInput.value = '';
-		descriptionInput.value = '';
-		imageInput.value = '';
+	fetch('https://api-code.practicum-team.ru/heroes', {
+		method: 'POST', // POST нужен для сохранения и записи данных
+		body: newHeroJSON, // Тело запроса в JSON-формате
+		headers: {
+			// Добавляем необходимые заголовки
+			'Content-type': 'application/json; charset=UTF-8'
+		}
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data); // Смотрим ответ сервера на наш запрос
+			cards.push(data); // Добавляем в переменную cards данные о новой карточке
+			renderCards(cards); // Отображаем обновлённый набор карточек
+			form.reset(); // Сбрасываем все поля формы
+		});
+});
 
-		errorMessageHide();
-		closeModal();
-	} else {
-		errorMessage();
-	}
-}
-
-// Вызов функции загрузки данных при загрузке страницы
-// window.addEventListener('load', loadDataFromLocalStorage);
-
-document.getElementById('addButton').addEventListener('click', addHero);
-document.getElementById('openModalButton').addEventListener('click', openModal);
-document.getElementById('closeModalButton').addEventListener('click', closeModal);
+let addHeroButton = document.querySelector('#addHero');
+let errorText = document.querySelector('#errorText');
