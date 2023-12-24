@@ -15,81 +15,61 @@ fetch(
 	})
 	.catch((error) => console.error('Ошибка:', error));
 
-// Передаём массив с данными аргументом в функцию отрисовки карточек
 function renderCards(heroes) {
-	// Чистим контейнер для карточек
 	container.innerHTML = '';
 
-	//  В цикле достаём из каждого объекта данные о персонаже и вставляем в вёрстку карточки
 	for (let i = 0; i < heroes.length; i++) {
 		let hero = heroes[i];
 
-		// Создаём верстку карточки и вставляем значения характеристик персонажа
 		const cardHtml = `
-        <div class="card-wrapper">
-            <div class="card">
-                <div class="card-title">
-                    <h2 class="card-title-text">${hero.title}</h2>
-                </div>
-                <div class="card-description">
-                    <p class="card-description-text">${hero.description}</p>
-                    <div class="card-parameters">
-                        <div class="card-parameter">
-                            <p class="card-parameter-title">str</p>
-                            <p class="card-parameter-value">${hero.str}</p>
-                        </div>
-                        <div class="card-parameter">
-                            <p class="card-parameter-title">agi</p>
-                            <p class="card-parameter-value">${hero.agi}</p>
-                        </div>
-                        <div class="card-parameter">
-                            <p class="card-parameter-title">hp</p>
-                            <p class="card-parameter-value">${hero.hp}</p>
-                        </div>
-                        <div class="card-parameter">
-                            <p class="card-parameter-title">int</p>
-                            <p class="card-parameter-value">${hero.int}</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="hero-card">
+            <div class="hero-card__content">
+				<div class="hero-card__top-frame">
+					<div class="hero-card__title">
+						<h2 class="card-title-text">${hero.title}</h2>
+					</div>
+					<div class="hero-card__image-quote-wrapper">
+        				<img class="hero-card__image" src="${hero.additionalStat}" />
+					<div class="card-description">
+						<p class="card-description-text">${hero.description}</p>
+						<div class="card-parameters">
+							<div class="card-parameter">
+								<p class="card-parameter-title">str</p>
+								<p class="card-parameter-value">${hero.str}</p>
+							</div>
+							<div class="card-parameter">
+								<p class="card-parameter-title">agi</p>
+								<p class="card-parameter-value">${hero.agi}</p>
+							</div>
+							<div class="card-parameter">
+								<p class="card-parameter-title">hp</p>
+								<p class="card-parameter-value">${hero.hp}</p>
+							</div>
+							<div class="card-parameter">
+								<p class="card-parameter-title">int</p>
+								<p class="card-parameter-value">${hero.int}</p>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
         </div>
     `;
-		// Добавляем вёрстку карточки в контейнер
 		container.innerHTML += cardHtml;
 	}
 }
-
-//Получение элементов формы
 const form = document.forms.addHero; // Получаем форму
 const titleInput = form.elements.title; // Получаем поле с именем
 const descriptionInput = form.elements.description; // Получаем поле с описанием
+const addStatInput = form.elements.adds; // Получаем поле с ссылкой на картинку
 const strInput = form.elements.str; // Получаем поле с уровнем силы
 const agiInput = form.elements.agi; // Получаем поле с уровнем ловкости
 const hpInput = form.elements.hp; // Получаем поле с уровнем здоровья
 const intInput = form.elements.int; // Получаем поле с уровнем интеллекта
 
-// Вешаем на форму обработчик события submit
-form.addEventListener('submit', function (evt) {
-	// Отменяем стандартное поведение
-	evt.preventDefault();
+let addHeroButton = document.querySelector('#addHero');
+let errorText = document.querySelector('#errorText');
 
-	// Создаём объект с новым персонажем и записываем данные
-	let newHero = {
-		title: titleInput.value,
-		description: descriptionInput.value,
-		str: strInput.value,
-		agi: agiInput.value,
-		hp: hpInput.value,
-		int: intInput.value,
-		// Чтобы выделить карточки проекта, указываем почту
-		studentEmail: studentEmail
-	};
-	// Формируем JSON-строку из объекта
-	let newHeroJSON = JSON.stringify(newHero);
-});
-
-// Вешаем на форму обработчик события submit
 form.addEventListener('submit', function (evt) {
 	// Отменяем стандартное поведение
 	evt.preventDefault();
@@ -103,6 +83,7 @@ form.addEventListener('submit', function (evt) {
 		agi: agiInput.value,
 		hp: hpInput.value,
 		int: intInput.value,
+		additionalStat: addStatInput.value,
 		studentEmail: studentEmail
 	};
 	// Формируем JSON-строку из объекта
@@ -124,6 +105,3 @@ form.addEventListener('submit', function (evt) {
 			form.reset(); // Сбрасываем все поля формы
 		});
 });
-
-let addHeroButton = document.querySelector('#addHero');
-let errorText = document.querySelector('#errorText');

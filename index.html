@@ -4,11 +4,13 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>КарП</title>
+		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
 		<form name="addHero" class="form">
 			<input class="form-input" type="text" name="title" id="title" required placeholder="Имя героя" />
 			<input class="form-input" type="text" name="description" id="description" required placeholder="Описание" />
+			<input class="form-input" type="text" name="adds" id="adds" required placeholder="Ссылка на картинку" />
 			<div class="form-parameters">
 				<input
 					class="form-input parameter-input"
@@ -16,7 +18,7 @@
 					name="str"
 					id="str"
 					min="1"
-					max="99"
+					max="100"
 					placeholder="Сила"
 				/>
 				<input
@@ -25,7 +27,7 @@
 					name="agi"
 					id="agi"
 					min="1"
-					max="99"
+					max="100"
 					placeholder="Ловкость"
 				/>
 				<input
@@ -40,10 +42,10 @@
 				<input
 					class="form-input parameter-input"
 					type="number"
-					name="int"
-					id="int"
+					name="adds"
+					id="adds"
 					min="1"
-					max="99"
+					max="100"
 					placeholder="Интеллект"
 				/>
 			</div>
